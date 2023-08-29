@@ -4,10 +4,10 @@ import { useState } from "react";
 function Square() {
   const [value, setValue] = useState(null);
   function handleClick() {
-    alert("click");
+    setValue("X");
   }
   return (
-    <button className="square" onClick={handleClick}></button>
+    <button className="square" onClick={handleClick}>{value}</button>
   );
 }
 export default function Board() {
