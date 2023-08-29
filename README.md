@@ -76,3 +76,10 @@ Reactのコンポーネントのプロパティ（props）として関数を渡�
 ```
 
 この書き方では、`onClick`に渡されるのは`handleClick(0)`を実行するアロー関数です。このため、`Square`がクリックされたときにのみ、`handleClick(0)`が実際に実行されます。
+
+#### ユーザが盤面の左上のマス目をクリックして X を置いた場合を例に、何が起こるのかを
+1. 左上のマス目をクリックすると、button が props として受け取った onClick 関数が実行されます。Square コンポーネントはその関数を Board から onSquareClick プロパティとして受け取っています。Board コンポーネントはその関数を JSX の中で直接定義しています。その関数は引数 0 で handleClick を呼び出します。
+
+2. handleClick は引数 0 を使って、squares 配列の最初の要素を null から X に更新します。
+
+3. Board コンポーネントの state である squares が更新されたので、Board とそのすべての子が再レンダーされます。これにより、インデックス 0 である Square コンポーネントの value プロパティが null から X に変更されます。
