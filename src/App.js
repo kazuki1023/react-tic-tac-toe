@@ -1,6 +1,9 @@
 import React from "react";
 function Square({ value }) {
-  return <button className="square">{value}</button>;
+  function handleClick() {
+    alert("click");
+  }
+  return <button className="square" onClick={handleClick}>{value}</button>;
 }
 export default function Board() {
   return (
