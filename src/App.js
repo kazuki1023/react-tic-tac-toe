@@ -1,5 +1,8 @@
 import React from "react";
-export default function Square() {
+function Square() {
+  return <button className="square">1</button>;
+}
+export default function Board() {
   return (
     <div>
       <div className="board-row">
