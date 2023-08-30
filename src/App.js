@@ -1,12 +1,14 @@
 import React from "react";
 import { useState } from "react";
 
-const Square = ({ value ,onSquareClick}) =>  {
+const Square = ({ value, onSquareClick }) => {
   return (
     <button className="square" onClick={onSquareClick}>{value}</button>
   );
 }
+
 const Board = ({ xIsNext, squares, onPlay }) => {
+
   const handleClick = (i) => {
     if (squares[i] || calculateWinner(squares)) {
       return;
@@ -19,6 +21,7 @@ const Board = ({ xIsNext, squares, onPlay }) => {
     }
     onPlay(nextSquares);
   }
+
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
@@ -26,6 +29,7 @@ const Board = ({ xIsNext, squares, onPlay }) => {
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
+
   return (
     <div>
       <div className="status">{status}</div>
@@ -49,6 +53,7 @@ const Board = ({ xIsNext, squares, onPlay }) => {
 }
 
 const calculateWinner = (squares) => {
+
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -59,6 +64,7 @@ const calculateWinner = (squares) => {
     [0, 4, 8],
     [2, 4, 6]
   ];
+
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
@@ -69,6 +75,7 @@ const calculateWinner = (squares) => {
 }
 
 const Game = () => {
+
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0;
@@ -79,9 +86,11 @@ const Game = () => {
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   }
+
   const jumpTo = (nextMove) => {
     setCurrentMove(nextMove);
   }
+
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
@@ -95,10 +104,11 @@ const Game = () => {
       </li>
     );
   });
+
   return (
     <div className="game">
       <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
         <ol>{moves}</ol>
@@ -106,4 +116,5 @@ const Game = () => {
     </div>
   );
 }
+
 export default Game;
